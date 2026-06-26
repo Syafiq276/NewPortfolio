@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Scrollbar (Light Theme) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F4F5F7;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #E0E1DD;
+    border-radius: 4px;
+    border: 1px solid rgba(11, 19, 43, 0.06);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #D4AF37;
+}
+
+/* Global Body Styles */
+body {
+    background-color: #F4F5F7;
+    color: #0B132B;
+    overflow-x: hidden;
+}
+
+/* Glassmorphism Styles (Light/Silver Translucent) */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(11, 19, 43, 0.06);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(11, 19, 43, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.75);
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 10px 30px -10px rgba(11, 19, 43, 0.08);
+    transform: translateY(-4px);
+}
+
+.gold-glow {
+    box-shadow: 0 0 15px 2px rgba(212, 175, 55, 0.15);
+}
+
+.gold-text-glow {
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.25);
+}
+
+/* Custom Interactive Nodes for Timeline */
+.timeline-dot {
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+}
+
+/* ==========================================
+   Admin Page Theme Overrides for Light Theme
+   ========================================== */
+
+/* Style form inputs globally inside Admin glass-panels to match light theme */
+.glass-panel input[type="text"],
+.glass-panel input[type="email"],
+.glass-panel input[type="url"],
+.glass-panel input[type="number"],
+.glass-panel input[type="password"],
+.glass-panel input[type="file"],
+.glass-panel textarea,
+.glass-panel select {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    border: 1px solid rgba(11, 19, 43, 0.15) !important;
+    color: #0B132B !important;
+}
+
+.glass-panel input[type="text"]::placeholder,
+.glass-panel input[type="email"]::placeholder,
+.glass-panel input[type="url"]::placeholder,
+.glass-panel input[type="number"]::placeholder,
+.glass-panel input[type="password"]::placeholder,
+.glass-panel textarea::placeholder {
+    color: rgba(28, 37, 65, 0.45) !important;
+}
+
+.glass-panel label {
+    color: #0B132B !important;
+}
+
+.glass-panel input[type="checkbox"] {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    border: 1px solid rgba(11, 19, 43, 0.2) !important;
+}
+
+/* Style file upload selector buttons in admin views */
+.glass-panel input[type="file"]::file-selector-button {
+    background-color: rgba(11, 19, 43, 0.06) !important;
+    color: #0B132B !important;
+    border: 1px solid rgba(11, 19, 43, 0.12) !important;
+    padding: 6px 12px !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+
+.glass-panel input[type="file"]::file-selector-button:hover {
+    background-color: #D4AF37 !important;
+    color: #0B132B !important;
+    border-color: #D4AF37 !important;
+}
+
+/* Force dark text color inside light-background main admin content */
+main.bg-pearl-light h3.text-pearl-light,
+main.bg-pearl-light h4.text-pearl-light,
+main.bg-pearl-light label.text-pearl-light,
+main.bg-pearl-light td.text-pearl-light,
+main.bg-pearl-light div.text-pearl-light,
+main.bg-pearl-light span.text-pearl-light {
+    color: #0B132B !important;
+}
+
+main.bg-pearl-light p.text-pearl-muted,
+main.bg-pearl-light span.text-pearl-muted,
+main.bg-pearl-light td.text-pearl-muted,
+main.bg-pearl-light div.text-pearl-muted,
+main.bg-pearl-light li.text-pearl-muted {
+    color: rgba(28, 37, 65, 0.7) !important;
+}
+
+/* Style back buttons and other dark buttons in admin views */
+main .bg-lunar-light\/30,
+main .bg-lunar-light\/45 {
+    background-color: rgba(255, 255, 255, 0.7) !important;
+    color: #0B132B !important;
+    border: 1px solid rgba(11, 19, 43, 0.12) !important;
+}
+
+main .bg-lunar-light\/30:hover,
+main .bg-lunar-light\/45:hover {
+    border-color: #D4AF37 !important;
+    color: #D4AF37 !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
