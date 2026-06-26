@@ -58,14 +58,14 @@ export default function About({ experiences = [], certificates = [], settings = 
                         <div className="w-full max-w-sm rounded-2xl glass-panel p-6 border-b-4 border-b-gold-base shadow-xl text-center relative overflow-hidden group">
                             {/* Glow behind logo */}
                             <div className="absolute -top-10 -left-10 w-24 h-24 bg-gold-base/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
-                            
+
                             <div className="w-24 h-24 rounded-full bg-gold-base/10 border-2 border-gold-base flex items-center justify-center font-bold text-gold-base text-3xl mx-auto mb-6 shadow-md">
                                 DEV
                             </div>
-                            
-                            <h3 className="text-xl font-bold text-lunar-dark mb-1">Fathan</h3>
-                            <p className="text-xs text-gold-base font-semibold uppercase tracking-wider mb-6">Full-Stack Engineer</p>
-                            
+
+                            <h3 className="text-xl font-bold text-lunar-dark mb-1">Syafiq</h3>
+                            <p className="text-xs text-gold-base font-semibold uppercase tracking-wider mb-6">Fresh Graduate</p>
+
                             {/* Contact Details */}
                             <div className="space-y-3.5 text-left border-t border-lunar-light/10 pt-6 text-sm text-lunar-light/85 mb-6">
                                 {settings.email && (
@@ -169,7 +169,7 @@ export default function About({ experiences = [], certificates = [], settings = 
                         <p className="text-lunar-light/75 text-sm leading-relaxed">
                             Have an interesting project in mind or want to collaborate? Fill out the contact form, and I will get back to you as soon as possible.
                         </p>
-                        
+
                         {/* Direct contact channels */}
                         <div className="space-y-4 pt-6 text-sm text-lunar-light/80 font-semibold">
                             <div className="flex items-center gap-3">
