@@ -26,8 +26,9 @@
 body {
     background-color: #F4F5F7;
     background-image: 
-        repeating-conic-gradient(from 30deg, transparent 0deg 120deg, rgba(11, 19, 43, 0.015) 120deg 180deg) calc(0.5 * 180px) calc(0.5 * 180px * 0.577),
+        repeating-conic-gradient(from 30deg, transparent 0deg 120deg, rgba(11, 19, 43, 0.015) 120deg 180deg),
         repeating-conic-gradient(from 30deg, rgba(11, 19, 43, 0.04) 0deg 60deg, rgba(11, 19, 43, 0.025) 60deg 120deg, rgba(11, 19, 43, 0.015) 120deg 180deg);
+    background-position: calc(0.5 * 180px) calc(0.5 * 180px * 0.577), 0px 0px;
     background-size: 180px calc(180px * 0.577);
     background-attachment: fixed;
     color: #0B132B;
