@@ -21,14 +21,14 @@ export default function PublicLayout({ children, settings = {} }) {
     return (
         <div className="min-h-screen bg-pearl-light text-lunar-dark flex flex-col font-sans selection:bg-gold-base selection:text-lunar-dark relative">
             {/* Subtle Conic Grid Watermark Pattern */}
-            <div className="absolute inset-0 pointer-events-none z-0 opacity-70" style={{ 
+            <div className="fixed inset-0 pointer-events-none z-0" style={{ 
                 backgroundImage: `
-                    repeating-conic-gradient(from 30deg, #0000 0 120deg, rgba(30, 30, 30, 0.006) 0 180deg) calc(0.5 * 180px) calc(0.5 * 180px * 0.577),
-                    repeating-conic-gradient(from 30deg, rgba(30, 30, 30, 0.015) 0 60deg, rgba(30, 30, 30, 0.01) 0 120deg, rgba(30, 30, 30, 0.005) 0 180deg)
+                    repeating-conic-gradient(from 30deg, #0000 0 120deg, rgba(0, 0, 0, 0.02) 0 180deg) calc(0.5 * 180px) calc(0.5 * 180px * 0.577),
+                    repeating-conic-gradient(from 30deg, rgba(0, 0, 0, 0.06) 0 60deg, rgba(0, 0, 0, 0.04) 0 120deg, rgba(0, 0, 0, 0.02) 0 180deg)
                 `,
                 backgroundSize: '180px calc(180px * 0.577)',
-                maskImage: 'linear-gradient(to bottom, black 30%, transparent 85%)',
-                WebkitMaskImage: 'linear-gradient(to bottom, black 30%, transparent 85%)'
+                maskImage: 'linear-gradient(to bottom, black 40%, transparent 95%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 95%)'
             }} />
 
             {/* Header / Navbar (Royal Navy Background) */}
