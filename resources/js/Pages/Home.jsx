@@ -145,8 +145,17 @@ export default function Home({ projects = [], skills = [], certificates = [], se
                     </Link>
                 </div>
 
+                {/* Hover Focus Blur Effect */}
+                <style>{`
+                    .featured-projects-grid:hover > .featured-project-card:not(:hover) {
+                        filter: blur(3px);
+                        opacity: 0.55;
+                        transform: scale(0.96) !important;
+                    }
+                `}</style>
+
                 <motion.div
-                    className="grid grid-cols-1 md:grid-cols-3 gap-8"
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8 featured-projects-grid"
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: '-100px' }}
@@ -155,7 +164,7 @@ export default function Home({ projects = [], skills = [], certificates = [], se
                     {projects.map((project) => (
                         <motion.div
                             key={project.id}
-                            className="flex flex-col rounded-xl overflow-hidden glass-card h-full cursor-pointer hover:border-gold-base/30 transition-all duration-300 hover:-translate-y-1 group"
+                            className="flex flex-col rounded-xl overflow-hidden glass-card h-full cursor-pointer border border-lunar-light/10 hover:border-gold-base/40 transition-all duration-500 hover:scale-[1.04] hover:shadow-xl hover:shadow-gold-base/5 group featured-project-card"
                             onClick={() => setSelectedProject(project)}
                             variants={cardVariants}
                         >
