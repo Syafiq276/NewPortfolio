@@ -79,17 +79,17 @@ export default function Home({ projects = [], skills = [], certificates = [], se
                     `}</style>
                     {/* Gold Blob */}
                     <div 
-                        className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] sm:w-[600px] sm:h-[600px] rounded-full bg-gold-base/5 blur-[90px] sm:blur-[140px]"
+                        className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] sm:w-[600px] sm:h-[600px] rounded-full bg-gold-base/15 blur-[80px] sm:blur-[110px]"
                         style={{ animation: 'aurora-1 25s infinite alternate ease-in-out' }}
                     />
-                    {/* Off-White Pearl Blob */}
+                    {/* Slate Lunar Light Blob */}
                     <div 
-                        className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[350px] h-[350px] sm:w-[600px] sm:h-[600px] rounded-full bg-pearl-base/30 blur-[90px] sm:blur-[140px]"
+                        className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[350px] h-[350px] sm:w-[600px] sm:h-[600px] rounded-full bg-lunar-light/12 blur-[80px] sm:blur-[110px]"
                         style={{ animation: 'aurora-2 30s infinite alternate ease-in-out' }}
                     />
-                    {/* Accent Lunar Light Blob */}
+                    {/* Accent Gold Light Blob */}
                     <div 
-                        className="absolute top-1/3 right-1/3 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] rounded-full bg-lunar-light/5 blur-[90px] sm:blur-[140px]"
+                        className="absolute top-1/3 right-1/3 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] rounded-full bg-gold-light/10 blur-[80px] sm:blur-[110px]"
                         style={{ animation: 'aurora-3 22s infinite alternate ease-in-out' }}
                     />
                 </div>
