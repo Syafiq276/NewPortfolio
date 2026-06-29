@@ -221,4 +221,62 @@ main .bg-lunar-light\/45:hover {
     }
 }
 
+/* Circular Rotating Gold Glow Avatar Style */
+.glow-avatar {
+    position: relative;
+    overflow: hidden;
+    border-radius: 9999px;
+    z-index: 0;
+    width: 290px;
+    height: 290px;
+    margin: 0 auto;
+    box-shadow: 0 15px 35px -10px rgba(11, 19, 43, 0.25);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.glow-avatar::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: linear-gradient(180deg, #D4AF37, rgba(212, 175, 55, 0.05), #D4AF37);
+    animation: rotBGimg 4s linear infinite;
+    z-index: -2;
+    transition: all 0.3s linear;
+}
+
+.glow-avatar::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: #F4F5F7;
+    border-radius: 9999px;
+    z-index: -1;
+    transition: background 0.3s ease;
+}
+
+.glow-avatar img {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 9999px;
+}
+
+.glow-avatar:hover {
+    transform: scale(1.035) rotate(1deg);
+    box-shadow: 0 20px 45px -10px rgba(212, 175, 55, 0.28);
+    border-color: rgba(212, 175, 55, 0.45);
+}
+
+.glow-avatar:hover::before {
+    background-image: linear-gradient(180deg, #D4AF37, #E0E1DD, #D4AF37);
+    animation-duration: 2.2s;
+}
+
+
 

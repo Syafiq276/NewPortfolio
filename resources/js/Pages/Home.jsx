@@ -61,41 +61,59 @@ export default function Home({ projects = [], skills = [], certificates = [], se
             <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden px-4 py-16 sm:px-6 lg:px-8 border-b border-lunar-light/10">
 
 
-                <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <motion.div
-                        initial="hidden"
-                        animate="visible"
-                        variants={heroVariants}
-                    >
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider text-gold-base bg-gold-base/10 border border-gold-base/20 mb-6 uppercase">
-                            <ShieldCheck className="w-3.5 h-3.5" /> Open For Opportunities
-                        </span>
-
-                        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-lunar-dark mb-6">
-                            Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-base via-gold-light to-lunar-light gold-text-glow">Syafiq</span>
-                        </h1>
-
-
-                        <p className="max-w-2xl mx-auto text-base text-lunar-light/70 leading-relaxed mb-10">
-                            {settings.about_summary || 'I specialize in crafting high-end single-page applications with clean design aesthetics, fluid micro-interactions, and secure backends.'}
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <Link
-                                href={route('projects')}
-                                className="w-full sm:w-auto px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-lunar-dark bg-gold-base hover:bg-gold-light border border-gold-base rounded-lg transition-all duration-300 shadow-lg gold-glow hover:translate-y-[-2px] flex items-center justify-center gap-2 group"
+                <div className="max-w-7xl mx-auto w-full relative z-10">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+                        
+                        {/* Profile Image (Left Side on Desktop) */}
+                        <div className="col-span-12 md:col-span-5 flex justify-center order-first md:order-none">
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.6, ease: 'easeOut' }}
+                                className="glow-avatar"
                             >
-                                View Projects
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </Link>
-                            <Link
-                                href={route('about') + '#contact'}
-                                className="w-full sm:w-auto px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-lunar-dark hover:text-pearl-light bg-pearl-base/20 hover:bg-lunar-dark border border-lunar-light/20 hover:border-lunar-dark rounded-lg transition-all duration-300 hover:translate-y-[-2px] flex items-center justify-center"
-                            >
-                                Let's Connect
-                            </Link>
+                                <img src="/images/profile.png" alt="Syafiq profile" />
+                            </motion.div>
                         </div>
-                    </motion.div>
+
+                        {/* Words/Content (Right Side on Desktop, text-left) */}
+                        <div className="col-span-12 md:col-span-7 text-center md:text-left flex flex-col items-center md:items-start">
+                            <motion.div
+                                initial="hidden"
+                                animate="visible"
+                                variants={heroVariants}
+                            >
+                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider text-gold-base bg-gold-base/10 border border-gold-base/20 mb-6 uppercase">
+                                    <ShieldCheck className="w-3.5 h-3.5" /> Open For Opportunities
+                                </span>
+
+                                <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-lunar-dark mb-6">
+                                    Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-base via-gold-light to-lunar-light gold-text-glow">Syafiq</span>
+                                </h1>
+
+                                <p className="max-w-2xl text-base text-lunar-light/70 leading-relaxed mb-10">
+                                    {settings.about_summary || 'I specialize in crafting high-end single-page applications with clean design aesthetics, fluid micro-interactions, and secure backends.'}
+                                </p>
+
+                                <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+                                    <Link
+                                        href={route('projects')}
+                                        className="w-full sm:w-auto px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-lunar-dark bg-gold-base hover:bg-gold-light border border-gold-base rounded-lg transition-all duration-300 shadow-lg gold-glow hover:translate-y-[-2px] flex items-center justify-center gap-2 group"
+                                    >
+                                        View Projects
+                                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                    </Link>
+                                    <Link
+                                        href={route('about') + '#contact'}
+                                        className="w-full sm:w-auto px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-lunar-dark hover:text-pearl-light bg-pearl-base/20 hover:bg-lunar-dark border border-lunar-light/20 hover:border-lunar-dark rounded-lg transition-all duration-300 hover:translate-y-[-2px] flex items-center justify-center"
+                                    >
+                                        Let's Connect
+                                    </Link>
+                                </div>
+                            </motion.div>
+                        </div>
+
+                    </div>
                 </div>
             </section>
 
