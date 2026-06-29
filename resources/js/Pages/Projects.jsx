@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Head } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ExternalLink, Filter } from 'lucide-react';
 import { Github } from '@/Components/BrandIcons';
 import ProjectDetailsModal from '@/Components/ProjectDetailsModal';
+import KineticTextLoader from '@/Components/KineticTextLoader';
 
 export default function Projects({ projects = [], settings = {} }) {
     const [search, setSearch] = useState('');
     const [selectedTech, setSelectedTech] = useState('All');
     const [selectedProject, setSelectedProject] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 1500);
+        return () => clearTimeout(timer);
+    }, []);
 
     // Extract unique technologies dynamically
     const allTechs = ['All', ...new Set(projects.flatMap(p => p.tech_stack || []))];
@@ -44,7 +53,28 @@ export default function Projects({ projects = [], settings = {} }) {
         <PublicLayout settings={settings}>
             <Head title="Projects - Developer Portfolio" />
 
-            <section className="relative px-4 py-16 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-[75vh]">
+            <AnimatePresence mode="wait">
+                {isLoading ? (
+                    <motion.div
+                        key="loader"
+                        initial={{ opacity: 1 }}
+                        exit={{ opacity: 0, y: -15 }}
+                        transition={{ duration: 0.4, ease: 'easeInOut' }}
+                        className="fixed inset-0 z-50 bg-lunar-dark flex flex-col items-center justify-center"
+                    >
+                        <KineticTextLoader text="Loading" />
+                        <span className="text-[10px] uppercase font-bold tracking-widest text-gold-base/55 mt-4 animate-pulse">
+                            Portfolio Projects
+                        </span>
+                    </motion.div>
+                ) : (
+                    <motion.section
+                        key="content"
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, ease: 'easeOut' }}
+                        className="relative px-4 py-16 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-[75vh]"
+                    >
                 <div className="absolute top-10 right-10 w-[400px] h-[400px] rounded-full bg-pearl-base/20 blur-[120px] pointer-events-none" />
 
                 {/* Section Header */}
@@ -183,7 +213,9 @@ export default function Projects({ projects = [], settings = {} }) {
                         <p className="text-lunar-light/70 text-sm">No projects found matching your criteria. Try another filter or search term!</p>
                     </motion.div>
                 )}
-            </section>
+            </motion.section>
+        )}
+    </AnimatePresence>
 
             <ProjectDetailsModal
                 project={selectedProject}
