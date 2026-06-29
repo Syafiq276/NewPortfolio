@@ -19,17 +19,7 @@ export default function PublicLayout({ children, settings = {} }) {
     const twitter = settings.twitter_url || 'https://twitter.com';
 
     return (
-        <div className="min-h-screen bg-pearl-light text-lunar-dark flex flex-col font-sans selection:bg-gold-base selection:text-lunar-dark relative">
-            {/* Subtle Conic Grid Watermark Pattern */}
-            <div className="fixed inset-0 pointer-events-none z-0" style={{ 
-                backgroundImage: `
-                    repeating-conic-gradient(from 30deg, #0000 0 120deg, rgba(0, 0, 0, 0.02) 0 180deg) calc(0.5 * 180px) calc(0.5 * 180px * 0.577),
-                    repeating-conic-gradient(from 30deg, rgba(0, 0, 0, 0.06) 0 60deg, rgba(0, 0, 0, 0.04) 0 120deg, rgba(0, 0, 0, 0.02) 0 180deg)
-                `,
-                backgroundSize: '180px calc(180px * 0.577)',
-                maskImage: 'linear-gradient(to bottom, black 40%, transparent 95%)',
-                WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 95%)'
-            }} />
+        <div className="min-h-screen bg-transparent text-lunar-dark flex flex-col font-sans selection:bg-gold-base selection:text-lunar-dark relative">
 
             {/* Header / Navbar (Royal Navy Background) */}
             <header className="sticky top-0 z-50 bg-lunar-dark/95 backdrop-blur-md border-b border-lunar-light/15 shadow-md">

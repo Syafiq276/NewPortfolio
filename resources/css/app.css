@@ -25,6 +25,11 @@
 /* Global Body Styles */
 body {
     background-color: #F4F5F7;
+    background-image: 
+        repeating-conic-gradient(from 30deg, #0000 0 120deg, rgba(11, 19, 43, 0.012) 0 180deg) calc(0.5 * 180px) calc(0.5 * 180px * 0.577),
+        repeating-conic-gradient(from 30deg, rgba(11, 19, 43, 0.04) 0 60deg, rgba(11, 19, 43, 0.025) 0 120deg, rgba(11, 19, 43, 0.012) 0 180deg);
+    background-size: 180px calc(180px * 0.577);
+    background-attachment: fixed;
     color: #0B132B;
     overflow-x: hidden;
 }
