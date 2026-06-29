@@ -59,8 +59,12 @@ export default function About({ experiences = [], certificates = [], settings = 
                             {/* Glow behind logo */}
                             <div className="absolute -top-10 -left-10 w-24 h-24 bg-gold-base/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
 
-                            <div className="w-24 h-24 rounded-full bg-gold-base/10 border-2 border-gold-base flex items-center justify-center font-bold text-gold-base text-3xl mx-auto mb-6 shadow-md">
-                                DEV
+                            <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gold-base mx-auto mb-6 shadow-md bg-pearl-base/10">
+                                <img
+                                    src={settings.profile_image_path || '/images/profile.png'}
+                                    alt="Syafiq profile"
+                                    className="w-full h-full object-cover"
+                                />
                             </div>
 
                             <h3 className="text-xl font-bold text-lunar-dark mb-1">Syafiq</h3>

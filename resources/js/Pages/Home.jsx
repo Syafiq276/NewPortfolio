@@ -72,7 +72,7 @@ export default function Home({ projects = [], skills = [], certificates = [], se
                                 transition={{ duration: 0.6, ease: 'easeOut' }}
                                 className="glow-avatar"
                             >
-                                <img src="/images/profile.png" alt="Syafiq profile" />
+                                <img src={settings.profile_image_path || '/images/profile.png'} alt="Syafiq profile" />
                             </motion.div>
                         </div>
 

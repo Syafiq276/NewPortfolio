@@ -13,13 +13,16 @@ class SettingController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Settings/Index', [
-            'settings' => Setting::pluck('value', 'key')->all()
+            'settings' => Setting::pluck('value', 'key')->all(),
+            'adminUser' => [
+                'email' => auth()->user()->email
+            ]
         ]);
     }
 
     public function update(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'about_summary' => 'required|string',
             'about_detailed' => 'required|string',
             'github_username' => 'nullable|string|max:255',
@@ -29,30 +32,57 @@ class SettingController extends Controller
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:255',
             'resume' => 'nullable|file|mimes:pdf|max:5120',
+            'profile_image' => 'nullable|image|mimes:png,jpg,jpeg,webp|max:5120',
+            'admin_email' => 'required|email|max:255',
+            'admin_password' => 'nullable|string|min:8',
         ]);
 
-        foreach ($validated as $key => $value) {
-            if ($key === 'resume') {
-                if ($request->hasFile('resume')) {
-                    $oldPathSetting = Setting::where('key', 'resume_path')->first();
-                    if ($oldPathSetting && $oldPathSetting->value) {
-                        $oldPath = str_replace('/storage/', '', $oldPathSetting->value);
-                        Storage::disk('public')->delete($oldPath);
-                    }
-
-                    $path = $request->file('resume')->store('resumes', 'public');
-                    Setting::updateOrCreate(
-                        ['key' => 'resume_path'],
-                        ['value' => '/storage/' . $path]
-                    );
-                }
-            } else {
-                Setting::updateOrCreate(
-                    ['key' => $key],
-                    ['value' => $value]
-                );
-            }
+        // 1. Update basic settings keys
+        $settingsKeys = ['about_summary', 'about_detailed', 'github_username', 'github_url', 'linkedin_url', 'twitter_url', 'email', 'phone'];
+        foreach ($settingsKeys as $key) {
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $request->input($key)]
+            );
         }
+
+        // 2. Handle Resume PDF file upload
+        if ($request->hasFile('resume')) {
+            $oldPathSetting = Setting::where('key', 'resume_path')->first();
+            if ($oldPathSetting && $oldPathSetting->value) {
+                $oldPath = str_replace('/storage/', '', $oldPathSetting->value);
+                Storage::disk('public')->delete($oldPath);
+            }
+
+            $path = $request->file('resume')->store('resumes', 'public');
+            Setting::updateOrCreate(
+                ['key' => 'resume_path'],
+                ['value' => '/storage/' . $path]
+            );
+        }
+
+        // 3. Handle Profile Photo upload
+        if ($request->hasFile('profile_image')) {
+            $oldImgSetting = Setting::where('key', 'profile_image_path')->first();
+            if ($oldImgSetting && $oldImgSetting->value) {
+                $oldImg = str_replace('/storage/', '', $oldImgSetting->value);
+                Storage::disk('public')->delete($oldImg);
+            }
+
+            $path = $request->file('profile_image')->store('profile_photos', 'public');
+            Setting::updateOrCreate(
+                ['key' => 'profile_image_path'],
+                ['value' => '/storage/' . $path]
+            );
+        }
+
+        // 4. Update Admin User Email & Password
+        $user = auth()->user();
+        $user->email = $request->input('admin_email');
+        if ($request->filled('admin_password')) {
+            $user->password = bcrypt($request->input('admin_password'));
+        }
+        $user->save();
 
         return redirect()->route('admin.settings.index')->with('success', 'Settings updated successfully.');
     }
