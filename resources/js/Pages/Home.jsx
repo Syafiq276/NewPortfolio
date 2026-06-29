@@ -59,9 +59,40 @@ export default function Home({ projects = [], skills = [], certificates = [], se
 
             {/* Hero Section */}
             <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden px-4 py-16 sm:px-6 lg:px-8 border-b border-lunar-light/10">
-                {/* Visual Radial Glows */}
-                <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] rounded-full bg-gold-base/5 blur-[80px] sm:blur-[120px] pointer-events-none" />
-                <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] rounded-full bg-pearl-base/35 blur-[80px] sm:blur-[120px] pointer-events-none" />
+                {/* Animated Aurora Flow Background */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                    <style>{`
+                        @keyframes aurora-1 {
+                            0%, 100% { transform: translate(0px, 0px) scale(1); }
+                            33% { transform: translate(50px, -60px) scale(1.15); }
+                            66% { transform: translate(-40px, 40px) scale(0.9); }
+                        }
+                        @keyframes aurora-2 {
+                            0%, 100% { transform: translate(0px, 0px) scale(1); }
+                            50% { transform: translate(-60px, 50px) scale(1.2); }
+                        }
+                        @keyframes aurora-3 {
+                            0%, 100% { transform: translate(0px, 0px) scale(1); }
+                            40% { transform: translate(40px, 30px) scale(0.95); }
+                            70% { transform: translate(-30px, -45px) scale(1.1); }
+                        }
+                    `}</style>
+                    {/* Gold Blob */}
+                    <div 
+                        className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] sm:w-[600px] sm:h-[600px] rounded-full bg-gold-base/5 blur-[90px] sm:blur-[140px]"
+                        style={{ animation: 'aurora-1 25s infinite alternate ease-in-out' }}
+                    />
+                    {/* Off-White Pearl Blob */}
+                    <div 
+                        className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[350px] h-[350px] sm:w-[600px] sm:h-[600px] rounded-full bg-pearl-base/30 blur-[90px] sm:blur-[140px]"
+                        style={{ animation: 'aurora-2 30s infinite alternate ease-in-out' }}
+                    />
+                    {/* Accent Lunar Light Blob */}
+                    <div 
+                        className="absolute top-1/3 right-1/3 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] rounded-full bg-lunar-light/5 blur-[90px] sm:blur-[140px]"
+                        style={{ animation: 'aurora-3 22s infinite alternate ease-in-out' }}
+                    />
+                </div>
 
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <motion.div
