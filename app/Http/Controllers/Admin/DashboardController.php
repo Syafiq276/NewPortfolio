@@ -14,21 +14,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Auto-run migrations in the background if any are pending
-        try {
-            $migrator = app('migrator');
-            $files = $migrator->getMigrationFiles($migrator->paths());
-            $ran = $migrator->getRepository()->getRan();
-            $pending = array_diff(array_keys($files), $ran);
-
-            if (!empty($pending)) {
-                \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
-                \Illuminate\Support\Facades\Artisan::call('optimize:clear');
-            }
-        } catch (\Exception $e) {
-            logger()->error('Auto-migration failed in dashboard: ' . $e->getMessage());
-        }
-
         return Inertia::render('Admin/Dashboard', [
             'stats' => [
                 'projects_count' => Project::count(),
