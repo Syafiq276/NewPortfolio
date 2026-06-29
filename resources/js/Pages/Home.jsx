@@ -131,7 +131,7 @@ export default function Home({ projects = [], skills = [], certificates = [], se
                     {projects.map((project) => (
                         <motion.div
                             key={project.id}
-                            className="flex flex-col rounded-xl overflow-hidden glass-card h-full cursor-pointer border border-lunar-light/10 hover:border-gold-base/40 transition-all duration-500 hover:scale-[1.04] hover:shadow-xl hover:shadow-gold-base/5 group featured-project-card"
+                            className="flex flex-col h-full cursor-pointer group glow-card featured-project-card"
                             onClick={() => setSelectedProject(project)}
                             variants={cardVariants}
                         >
@@ -256,7 +256,7 @@ export default function Home({ projects = [], skills = [], certificates = [], se
                     {certificates.map((cert) => (
                         <motion.div
                             key={cert.id}
-                            className="p-6 rounded-xl glass-card flex flex-col justify-between h-full"
+                            className="p-6 h-full flex flex-col justify-between glow-card"
                             variants={cardVariants}
                         >
                             <div>

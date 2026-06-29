@@ -136,7 +136,7 @@ export default function Projects({ projects = [], settings = {} }) {
                             <motion.div
                                 layout
                                 key={project.id}
-                                className="flex flex-col rounded-xl overflow-hidden glass-card h-full cursor-pointer hover:border-gold-base/30 transition-all duration-300 hover:-translate-y-1 group"
+                                className="flex flex-col h-full cursor-pointer group glow-card"
                                 onClick={() => setSelectedProject(project)}
                                 variants={cardVariants}
                                 exit="exit"

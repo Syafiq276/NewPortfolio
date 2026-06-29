@@ -157,3 +157,68 @@ main .bg-lunar-light\/45:hover {
     background-color: rgba(255, 255, 255, 0.95) !important;
 }
 
+/* ==========================================
+   Animated Rotating Glow Border Card Style
+   ========================================== */
+.glow-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    z-index: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glow-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: linear-gradient(180deg, #D4AF37, rgba(212, 175, 55, 0.05), #D4AF37);
+    animation: rotBGimg 4s linear infinite;
+    z-index: -2;
+    transition: all 0.3s linear;
+}
+
+.glow-card::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: rgba(254, 254, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 13px;
+    z-index: -1;
+    transition: background 0.3s ease;
+}
+
+.glow-card > * {
+    position: relative;
+    z-index: 10;
+}
+
+.glow-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px -10px rgba(212, 175, 55, 0.22);
+}
+
+.glow-card:hover::before {
+    background-image: linear-gradient(180deg, #D4AF37, #E0E1DD, #D4AF37);
+    animation-duration: 2.5s;
+}
+
+.glow-card:hover::after {
+    background: rgba(254, 254, 255, 0.96);
+}
+
+@keyframes rotBGimg {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
