@@ -19,7 +19,18 @@ export default function PublicLayout({ children, settings = {} }) {
     const twitter = settings.twitter_url || 'https://twitter.com';
 
     return (
-        <div className="min-h-screen bg-pearl-light text-lunar-dark flex flex-col font-sans selection:bg-gold-base selection:text-lunar-dark">
+        <div className="min-h-screen bg-pearl-light text-lunar-dark flex flex-col font-sans selection:bg-gold-base selection:text-lunar-dark relative">
+            {/* Subtle Conic Grid Watermark Pattern */}
+            <div className="absolute inset-0 pointer-events-none z-0 opacity-70" style={{ 
+                backgroundImage: `
+                    repeating-conic-gradient(from 30deg, #0000 0 120deg, rgba(30, 30, 30, 0.006) 0 180deg) calc(0.5 * 180px) calc(0.5 * 180px * 0.577),
+                    repeating-conic-gradient(from 30deg, rgba(30, 30, 30, 0.015) 0 60deg, rgba(30, 30, 30, 0.01) 0 120deg, rgba(30, 30, 30, 0.005) 0 180deg)
+                `,
+                backgroundSize: '180px calc(180px * 0.577)',
+                maskImage: 'linear-gradient(to bottom, black 30%, transparent 85%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 30%, transparent 85%)'
+            }} />
+
             {/* Header / Navbar (Royal Navy Background) */}
             <header className="sticky top-0 z-50 bg-lunar-dark/95 backdrop-blur-md border-b border-lunar-light/15 shadow-md">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -122,12 +133,12 @@ export default function PublicLayout({ children, settings = {} }) {
             </header>
 
             {/* Main Content */}
-            <main className="flex-grow">
+            <main className="flex-grow relative z-10">
                 {children}
             </main>
 
             {/* Footer (Royal Navy Background) */}
-            <footer className="bg-lunar-dark border-t border-lunar-light/15 py-8">
+            <footer className="bg-lunar-dark border-t border-lunar-light/15 py-8 relative z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="text-sm text-pearl-muted text-center md:text-left">
                         &copy; {new Date().getFullYear()} Syafiq Portfolio. All rights reserved.
