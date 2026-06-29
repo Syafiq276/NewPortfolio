@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Head, Link } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import { motion } from 'framer-motion';
 import { ArrowRight, ExternalLink, Award, Calendar, ShieldCheck } from 'lucide-react';
 import { Github } from '@/Components/BrandIcons';
+import ProjectDetailsModal from '@/Components/ProjectDetailsModal';
 import * as LucideIcons from 'lucide-react';
 
 const getIconComponent = (name) => {
@@ -26,6 +27,8 @@ const getIconComponent = (name) => {
 };
 
 export default function Home({ projects = [], skills = [], certificates = [], settings = {} }) {
+    const [selectedProject, setSelectedProject] = useState(null);
+
     const heroVariants = {
         hidden: { opacity: 0, y: 30 },
         visible: {
@@ -121,11 +124,12 @@ export default function Home({ projects = [], skills = [], certificates = [], se
                     {projects.map((project) => (
                         <motion.div
                             key={project.id}
-                            className="flex flex-col rounded-xl overflow-hidden glass-card h-full"
+                            className="flex flex-col rounded-xl overflow-hidden glass-card h-full cursor-pointer hover:border-gold-base/30 transition-all duration-300 hover:-translate-y-1 group"
+                            onClick={() => setSelectedProject(project)}
                             variants={cardVariants}
                         >
                             {/* Thumbnail */}
-                            <div className="relative aspect-video bg-pearl-base/40 overflow-hidden group">
+                            <div className="relative aspect-video bg-pearl-base/40 overflow-hidden">
                                 {project.thumbnail_path ? (
                                     <img
                                         src={project.thumbnail_path}
@@ -142,7 +146,7 @@ export default function Home({ projects = [], skills = [], certificates = [], se
                             {/* Content */}
                             <div className="p-6 flex-grow flex flex-col justify-between">
                                 <div>
-                                    <h4 className="text-lg font-bold text-lunar-dark mb-2">{project.title}</h4>
+                                    <h4 className="text-lg font-bold text-lunar-dark mb-2 group-hover:text-gold-base transition-colors">{project.title}</h4>
                                     <p className="text-sm text-lunar-light/75 line-clamp-3 mb-4 leading-relaxed">{project.description}</p>
 
                                     {/* Tech badges */}
@@ -158,12 +162,24 @@ export default function Home({ projects = [], skills = [], certificates = [], se
                                 {/* Links */}
                                 <div className="flex items-center gap-4 pt-4 border-t border-lunar-light/10">
                                     {project.github_url && (
-                                        <a href={project.github_url} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-lunar-light/70 hover:text-gold-base flex items-center gap-1 transition-colors">
+                                        <a
+                                            href={project.github_url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            onClick={(e) => e.stopPropagation()}
+                                            className="text-xs font-medium text-lunar-light/70 hover:text-gold-base flex items-center gap-1 transition-colors"
+                                        >
                                             <Github className="w-4 h-4" /> Code
                                         </a>
                                     )}
                                     {project.demo_url && (
-                                        <a href={project.demo_url} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-lunar-light/70 hover:text-gold-base flex items-center gap-1 transition-colors ml-auto">
+                                        <a
+                                            href={project.demo_url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            onClick={(e) => e.stopPropagation()}
+                                            className="text-xs font-medium text-lunar-light/70 hover:text-gold-base flex items-center gap-1 transition-colors ml-auto"
+                                        >
                                             <ExternalLink className="w-4 h-4" /> Live Demo
                                         </a>
                                     )}
@@ -259,6 +275,12 @@ export default function Home({ projects = [], skills = [], certificates = [], se
                     ))}
                 </motion.div>
             </section>
+
+            <ProjectDetailsModal
+                project={selectedProject}
+                isOpen={!!selectedProject}
+                onClose={() => setSelectedProject(null)}
+            />
         </PublicLayout>
     );
 }

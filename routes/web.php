@@ -27,6 +27,9 @@ Route::get('/dashboard', function () {
 // Admin Protected Routes
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::post('/system/clear-cache', [AdminDashboardController::class, 'clearCache'])->name('system.clearCache');
+    Route::post('/system/run-migrations', [AdminDashboardController::class, 'runMigrations'])->name('system.runMigrations');
+    Route::get('/system/status', [AdminDashboardController::class, 'systemStatus'])->name('system.status');
     
     Route::post('projects/sync', [AdminProjectController::class, 'sync'])->name('projects.sync');
     Route::resource('projects', AdminProjectController::class)->except(['show']);

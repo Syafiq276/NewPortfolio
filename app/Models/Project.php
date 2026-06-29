@@ -16,10 +16,12 @@ class Project extends Model
         'tech_stack',
         'is_featured',
         'order',
+        'gallery_images',
     ];
 
     protected $casts = [
         'tech_stack' => 'array',
         'is_featured' => 'boolean',
+        'gallery_images' => 'array',
     ];
 }

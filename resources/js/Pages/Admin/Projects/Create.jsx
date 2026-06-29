@@ -14,6 +14,7 @@ export default function Create() {
         is_featured: false,
         order: 0,
         thumbnail: null,
+        gallery: [],
     });
 
     const handleSubmit = (e) => {
@@ -33,7 +34,8 @@ export default function Create() {
             tech_stack: techStackArray,
             is_featured: data.is_featured ? 1 : 0,
             order: data.order,
-            thumbnail: data.thumbnail
+            thumbnail: data.thumbnail,
+            gallery: data.gallery,
         });
     };
 
@@ -161,6 +163,21 @@ export default function Create() {
                             />
                             {errors.order && <p className="text-xs text-rose-400 flex items-center gap-1 mt-1"><AlertCircle className="w-3.5 h-3.5" /> {errors.order}</p>}
                         </div>
+                    </div>
+
+                    {/* Gallery Screenshots */}
+                    <div className="space-y-2">
+                        <label htmlFor="gallery" className="text-xs font-semibold text-pearl-light uppercase tracking-wider">Gallery Screenshots (Multiple)</label>
+                        <input
+                            type="file"
+                            id="gallery"
+                            accept="image/*"
+                            multiple
+                            onChange={(e) => setData('gallery', Array.from(e.target.files))}
+                            className="w-full px-4 py-2 rounded-lg bg-lunar-dark/50 border border-lunar-border focus:border-gold-base text-xs text-pearl-muted file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-[11px] file:font-semibold file:bg-lunar-light/80 file:text-pearl-light hover:file:bg-gold-base hover:file:text-lunar-dark cursor-pointer"
+                        />
+                        <p className="text-[10px] text-pearl-muted mt-1">Select multiple image files (screenshots) to display inside the project details modal.</p>
+                        {errors.gallery && <p className="text-xs text-rose-400 flex items-center gap-1 mt-1"><AlertCircle className="w-3.5 h-3.5" /> {errors.gallery}</p>}
                     </div>
 
                     {/* Featured Checkbox */}

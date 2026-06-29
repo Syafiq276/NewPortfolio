@@ -113,6 +113,8 @@ class ProjectController extends Controller
             'is_featured' => 'required|boolean',
             'order' => 'required|integer',
             'thumbnail' => 'nullable|image|max:2048',
+            'gallery' => 'nullable|array',
+            'gallery.*' => 'image|max:2048',
         ]);
 
         $validated['slug'] = Str::slug($validated['title']) . '-' . rand(1000, 9999);
@@ -121,6 +123,15 @@ class ProjectController extends Controller
             $path = $request->file('thumbnail')->store('projects', 'public');
             $validated['thumbnail_path'] = '/storage/' . $path;
         }
+
+        $galleryPaths = [];
+        if ($request->hasFile('gallery')) {
+            foreach ($request->file('gallery') as $file) {
+                $path = $file->store('projects/gallery', 'public');
+                $galleryPaths[] = '/storage/' . $path;
+            }
+        }
+        $validated['gallery_images'] = $galleryPaths;
 
         Project::create($validated);
 
@@ -145,6 +156,10 @@ class ProjectController extends Controller
             'is_featured' => 'required|boolean',
             'order' => 'required|integer',
             'thumbnail' => 'nullable|image|max:2048',
+            'gallery' => 'nullable|array',
+            'gallery.*' => 'image|max:2048',
+            'deleted_images' => 'nullable|array',
+            'deleted_images.*' => 'string',
         ]);
 
         if ($project->title !== $validated['title']) {
@@ -160,6 +175,31 @@ class ProjectController extends Controller
             $validated['thumbnail_path'] = '/storage/' . $path;
         }
 
+        $gallery = $project->gallery_images ?? [];
+
+        // Handle deletions of screenshots
+        if ($request->has('deleted_images')) {
+            $deletedImages = $request->input('deleted_images');
+            foreach ($deletedImages as $img) {
+                if (($key = array_search($img, $gallery)) !== false) {
+                    unset($gallery[$key]);
+                }
+                $filePath = str_replace('/storage/', '', $img);
+                Storage::disk('public')->delete($filePath);
+            }
+            $gallery = array_values($gallery);
+        }
+
+        // Handle new screenshots uploads
+        if ($request->hasFile('gallery')) {
+            foreach ($request->file('gallery') as $file) {
+                $path = $file->store('projects/gallery', 'public');
+                $gallery[] = '/storage/' . $path;
+            }
+        }
+
+        $validated['gallery_images'] = $gallery;
+
         $project->update($validated);
 
         return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
@@ -170,6 +210,13 @@ class ProjectController extends Controller
         if ($project->thumbnail_path) {
             $oldPath = str_replace('/storage/', '', $project->thumbnail_path);
             Storage::disk('public')->delete($oldPath);
+        }
+        
+        if ($project->gallery_images) {
+            foreach ($project->gallery_images as $img) {
+                $filePath = str_replace('/storage/', '', $img);
+                Storage::disk('public')->delete($filePath);
+            }
         }
         
         $project->delete();

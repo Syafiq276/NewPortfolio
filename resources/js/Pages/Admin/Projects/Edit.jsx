@@ -14,6 +14,8 @@ export default function Edit({ project = {} }) {
         is_featured: project.is_featured === true || project.is_featured === 1,
         order: project.order || 0,
         thumbnail: null,
+        gallery: [],
+        deleted_images: [],
     });
 
     const handleSubmit = (e) => {
@@ -34,7 +36,9 @@ export default function Edit({ project = {} }) {
             tech_stack: techStackArray,
             is_featured: data.is_featured ? 1 : 0,
             order: data.order,
-            thumbnail: data.thumbnail
+            thumbnail: data.thumbnail,
+            gallery: data.gallery,
+            deleted_images: data.deleted_images,
         });
     };
 
@@ -165,6 +169,56 @@ export default function Edit({ project = {} }) {
                                 required
                             />
                             {errors.order && <p className="text-xs text-rose-400 flex items-center gap-1 mt-1"><AlertCircle className="w-3.5 h-3.5" /> {errors.order}</p>}
+                        </div>
+                    </div>
+
+                    {/* Gallery Screenshots Management */}
+                    <div className="space-y-4">
+                        <label className="text-xs font-semibold text-pearl-light uppercase tracking-wider block">Gallery Screenshots</label>
+                        
+                        {/* Display existing screenshots */}
+                        {project.gallery_images && project.gallery_images.length > 0 && (
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                {project.gallery_images.map((img, idx) => {
+                                    const isDeleted = data.deleted_images.includes(img);
+                                    return (
+                                        <div key={idx} className={`relative rounded-lg border border-lunar-border/40 overflow-hidden group aspect-video bg-lunar-dark ${isDeleted ? 'opacity-30 border-rose-500' : ''}`}>
+                                            <img src={img} alt={`Gallery ${idx + 1}`} className="w-full h-full object-cover" />
+                                            {!isDeleted ? (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setData('deleted_images', [...data.deleted_images, img])}
+                                                    className="absolute inset-0 bg-rose-950/80 flex items-center justify-center text-xs font-bold text-rose-200 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                                                >
+                                                    Delete
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setData('deleted_images', data.deleted_images.filter(x => x !== img))}
+                                                    className="absolute inset-0 bg-lunar-dark/90 flex items-center justify-center text-[10px] font-bold text-gold-base cursor-pointer"
+                                                >
+                                                    Undo Delete
+                                                </button>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        )}
+
+                        {/* File input for new screenshots */}
+                        <div className="space-y-2">
+                            <span className="text-[11px] text-pearl-muted block">Upload Additional Screenshots:</span>
+                            <input
+                                type="file"
+                                id="gallery"
+                                accept="image/*"
+                                multiple
+                                onChange={(e) => setData('gallery', Array.from(e.target.files))}
+                                className="w-full px-4 py-2 rounded-lg bg-lunar-dark/50 border border-lunar-border focus:border-gold-base text-xs text-pearl-muted file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-[11px] file:font-semibold file:bg-lunar-light/80 file:text-pearl-light hover:file:bg-gold-base hover:file:text-lunar-dark cursor-pointer"
+                            />
+                            {errors.gallery && <p className="text-xs text-rose-400 flex items-center gap-1 mt-1"><AlertCircle className="w-3.5 h-3.5" /> {errors.gallery}</p>}
                         </div>
                     </div>
 

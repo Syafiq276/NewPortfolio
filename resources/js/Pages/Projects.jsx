@@ -4,10 +4,12 @@ import PublicLayout from '@/Layouts/PublicLayout';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ExternalLink, Filter } from 'lucide-react';
 import { Github } from '@/Components/BrandIcons';
+import ProjectDetailsModal from '@/Components/ProjectDetailsModal';
 
 export default function Projects({ projects = [], settings = {} }) {
     const [search, setSearch] = useState('');
     const [selectedTech, setSelectedTech] = useState('All');
+    const [selectedProject, setSelectedProject] = useState(null);
 
     // Extract unique technologies dynamically
     const allTechs = ['All', ...new Set(projects.flatMap(p => p.tech_stack || []))];
@@ -104,12 +106,13 @@ export default function Projects({ projects = [], settings = {} }) {
                             <motion.div
                                 layout
                                 key={project.id}
-                                className="flex flex-col rounded-xl overflow-hidden glass-card h-full"
+                                className="flex flex-col rounded-xl overflow-hidden glass-card h-full cursor-pointer hover:border-gold-base/30 transition-all duration-300 hover:-translate-y-1 group"
+                                onClick={() => setSelectedProject(project)}
                                 variants={cardVariants}
                                 exit="exit"
                             >
                                 {/* Thumbnail */}
-                                <div className="relative aspect-video bg-pearl-base/40 overflow-hidden group">
+                                <div className="relative aspect-video bg-pearl-base/40 overflow-hidden">
                                     {project.thumbnail_path ? (
                                         <img
                                             src={project.thumbnail_path}
@@ -126,7 +129,7 @@ export default function Projects({ projects = [], settings = {} }) {
                                 {/* Content */}
                                 <div className="p-6 flex-grow flex flex-col justify-between">
                                     <div>
-                                        <h4 className="text-lg font-bold text-lunar-dark mb-2">{project.title}</h4>
+                                        <h4 className="text-lg font-bold text-lunar-dark mb-2 group-hover:text-gold-base transition-colors">{project.title}</h4>
                                         <p className="text-sm text-lunar-light/75 mb-4 leading-relaxed line-clamp-4">{project.description}</p>
                                         
                                         {/* Tech badges */}
@@ -142,12 +145,24 @@ export default function Projects({ projects = [], settings = {} }) {
                                     {/* Links */}
                                     <div className="flex items-center gap-4 pt-4 border-t border-lunar-light/10">
                                         {project.github_url && (
-                                            <a href={project.github_url} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-lunar-light/70 hover:text-gold-base flex items-center gap-1 transition-colors">
+                                            <a
+                                                href={project.github_url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                onClick={(e) => e.stopPropagation()}
+                                                className="text-xs font-medium text-lunar-light/70 hover:text-gold-base flex items-center gap-1 transition-colors"
+                                            >
                                                 <Github className="w-4 h-4" /> Code
                                             </a>
                                         )}
                                         {project.demo_url && (
-                                            <a href={project.demo_url} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-lunar-light/70 hover:text-gold-base flex items-center gap-1 transition-colors ml-auto">
+                                            <a
+                                                href={project.demo_url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                onClick={(e) => e.stopPropagation()}
+                                                className="text-xs font-medium text-lunar-light/70 hover:text-gold-base flex items-center gap-1 transition-colors ml-auto"
+                                            >
                                                 <ExternalLink className="w-4 h-4" /> Live Demo
                                             </a>
                                         )}
@@ -169,6 +184,12 @@ export default function Projects({ projects = [], settings = {} }) {
                     </motion.div>
                 )}
             </section>
+
+            <ProjectDetailsModal
+                project={selectedProject}
+                isOpen={!!selectedProject}
+                onClose={() => setSelectedProject(null)}
+            />
         </PublicLayout>
     );
 }

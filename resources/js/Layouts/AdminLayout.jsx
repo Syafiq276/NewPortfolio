@@ -12,7 +12,8 @@ import {
     Menu,
     X,
     CheckCircle,
-    AlertCircle
+    AlertCircle,
+    Server
 } from 'lucide-react';
 
 export default function AdminLayout({ children }) {
@@ -48,6 +49,7 @@ export default function AdminLayout({ children }) {
         { label: 'Timeline / Exp', href: route('admin.experiences.index'), icon: GraduationCap, active: url.startsWith('/admin/experiences') },
         { label: 'Certificates', href: route('admin.certificates.index'), icon: Award, active: url.startsWith('/admin/certificates') },
         { label: 'Inbox', href: route('admin.messages.index'), icon: Mail, active: url.startsWith('/admin/messages') },
+        { label: 'System Status', href: route('admin.system.status'), icon: Server, active: url.startsWith('/admin/system/status') },
         { label: 'Settings', href: route('admin.settings.index'), icon: Settings, active: url.startsWith('/admin/settings') },
     ];
 
