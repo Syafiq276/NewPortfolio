@@ -49,6 +49,19 @@ export default function Skills({ skills = [], settings = {} }) {
                 <meta name="description" content="Browse my developer skills profile, technologies matrix, and software engineering capabilities including React, Laravel, databases, and DevOps." />
                 <meta name="keywords" content="Skills, Web Development, Programming Languages, React, PHP, Laravel, SQL, DevOps" />
                 <link rel="canonical" href={canonicalUrl} />
+
+                {/* OpenGraph Tags */}
+                <meta property="og:title" content="Skills - Developer Portfolio" />
+                <meta property="og:description" content="Browse my developer skills profile, technologies matrix, and software engineering capabilities including React, Laravel, databases, and DevOps." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={canonicalUrl} />
+                <meta property="og:image" content={`${appUrl}/images/profile.png`} />
+
+                {/* Twitter Card Tags */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Skills - Developer Portfolio" />
+                <meta name="twitter:description" content="Browse my developer skills profile, technologies matrix, and software engineering capabilities including React, Laravel, databases, and DevOps." />
+                <meta name="twitter:image" content={`${appUrl}/images/profile.png`} />
             </Head>
 
             <section className="px-4 py-16 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-[75vh] relative">

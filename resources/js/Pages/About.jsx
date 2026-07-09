@@ -50,6 +50,19 @@ export default function About({ experiences = [], certificates = [], settings = 
                 <meta name="description" content="Learn about my background, career history, professional milestones, certificates, and get in touch with me directly through the contact form." />
                 <meta name="keywords" content="About Me, Professional Experience, Timeline, Contact, Software Engineer, Certificates" />
                 <link rel="canonical" href={canonicalUrl} />
+
+                {/* OpenGraph Tags */}
+                <meta property="og:title" content="About & Contact - Developer Portfolio" />
+                <meta property="og:description" content="Learn about my background, career history, professional milestones, certificates, and get in touch with me directly through the contact form." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={canonicalUrl} />
+                <meta property="og:image" content={`${appUrl}/images/profile.png`} />
+
+                {/* Twitter Card Tags */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="About & Contact - Developer Portfolio" />
+                <meta name="twitter:description" content="Learn about my background, career history, professional milestones, certificates, and get in touch with me directly through the contact form." />
+                <meta name="twitter:image" content={`${appUrl}/images/profile.png`} />
             </Head>
 
             <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 space-y-24 relative">

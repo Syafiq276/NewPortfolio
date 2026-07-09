@@ -63,6 +63,20 @@ export default function Home({ projects = [], skills = [], certificates = [], se
                 <meta name="description" content={settings.about_summary || "Hi, I'm Syafiq. I specialize in crafting high-end single-page applications with clean design aesthetics, fluid micro-interactions, and secure backends."} />
                 <meta name="keywords" content="Software Developer, Full Stack Developer, Laravel, React, Portfolio, Web Development, Syafiq" />
                 <link rel="canonical" href={canonicalUrl} />
+
+                {/* OpenGraph Tags */}
+                <meta property="og:title" content={siteTitle} />
+                <meta property="og:description" content={settings.about_summary || "Hi, I'm Syafiq. I specialize in crafting high-end single-page applications with clean design aesthetics, fluid micro-interactions, and secure backends."} />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={canonicalUrl} />
+                <meta property="og:image" content={`${appUrl}/images/profile.png`} />
+
+                {/* Twitter Card Tags */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={siteTitle} />
+                <meta name="twitter:description" content={settings.about_summary || "Hi, I'm Syafiq. I specialize in crafting high-end single-page applications with clean design aesthetics, fluid micro-interactions, and secure backends."} />
+                <meta name="twitter:image" content={`${appUrl}/images/profile.png`} />
+
                 <script type="application/ld+json">
                     {JSON.stringify({
                         "@context": "https://schema.org",

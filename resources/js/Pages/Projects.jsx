@@ -58,6 +58,19 @@ export default function Projects({ projects = [], settings = {} }) {
                 <meta name="description" content="Explore a showcase of my web applications, backend systems, and design projects built with React, Laravel, and other modern technologies." />
                 <meta name="keywords" content="Projects, Portfolio, React, Laravel, Web Apps, Software Engineering, Syafiq" />
                 <link rel="canonical" href={canonicalUrl} />
+
+                {/* OpenGraph Tags */}
+                <meta property="og:title" content="Projects - Developer Portfolio" />
+                <meta property="og:description" content="Explore a showcase of my web applications, backend systems, and design projects built with React, Laravel, and other modern technologies." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={canonicalUrl} />
+                <meta property="og:image" content={`${appUrl}/images/profile.png`} />
+
+                {/* Twitter Card Tags */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Projects - Developer Portfolio" />
+                <meta name="twitter:description" content="Explore a showcase of my web applications, backend systems, and design projects built with React, Laravel, and other modern technologies." />
+                <meta name="twitter:image" content={`${appUrl}/images/profile.png`} />
             </Head>
 
             <AnimatePresence mode="wait">
