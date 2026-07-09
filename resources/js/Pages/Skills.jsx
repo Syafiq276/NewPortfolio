@@ -1,5 +1,5 @@
 import React from 'react';
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import { motion } from 'framer-motion';
 import * as LucideIcons from 'lucide-react';
@@ -24,6 +24,9 @@ const getIconComponent = (name) => {
 };
 
 export default function Skills({ skills = [], settings = {} }) {
+    const { url, props } = usePage();
+    const appUrl = props.app_url || 'https://portfolio.syafiqdev.xyz';
+    const canonicalUrl = `${appUrl}${url === '/' ? '' : url}`;
     // Categorize skills dynamically
     const categories = [...new Set(skills.map(skill => skill.category))];
 
@@ -42,7 +45,11 @@ export default function Skills({ skills = [], settings = {} }) {
 
     return (
         <PublicLayout settings={settings}>
-            <Head title="Skills - Developer Portfolio" />
+            <Head title="Skills - Developer Portfolio">
+                <meta name="description" content="Browse my developer skills profile, technologies matrix, and software engineering capabilities including React, Laravel, databases, and DevOps." />
+                <meta name="keywords" content="Skills, Web Development, Programming Languages, React, PHP, Laravel, SQL, DevOps" />
+                <link rel="canonical" href={canonicalUrl} />
+            </Head>
 
             <section className="px-4 py-16 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-[75vh] relative">
                 <div className="absolute top-1/3 left-10 w-[300px] h-[300px] rounded-full bg-gold-base/5 blur-[100px] pointer-events-none" />

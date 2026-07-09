@@ -22,7 +22,7 @@ class PortfolioController extends Controller
 
     public function home()
     {
-        $featuredProjects = Project::where('is_featured', true)->orderBy('order')->get();
+        $featuredProjects = Project::where('is_visible', true)->where('is_featured', true)->orderBy('order')->get();
         $featuredSkills = Skill::where('is_featured', true)->orderBy('order')->get();
         $recentCertificates = Certificate::orderBy('issue_date', 'desc')->take(3)->get();
         
@@ -36,7 +36,7 @@ class PortfolioController extends Controller
 
     public function projects()
     {
-        $projects = Project::orderBy('order')->get();
+        $projects = Project::where('is_visible', true)->orderBy('order')->get();
         
         return Inertia::render('Projects', [
             'projects' => $projects,

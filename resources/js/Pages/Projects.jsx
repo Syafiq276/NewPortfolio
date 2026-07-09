@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ExternalLink, Filter } from 'lucide-react';
@@ -8,6 +8,9 @@ import ProjectDetailsModal from '@/Components/ProjectDetailsModal';
 import KineticTextLoader from '@/Components/KineticTextLoader';
 
 export default function Projects({ projects = [], settings = {} }) {
+    const { url, props } = usePage();
+    const appUrl = props.app_url || 'https://portfolio.syafiqdev.xyz';
+    const canonicalUrl = `${appUrl}${url === '/' ? '' : url}`;
     const [search, setSearch] = useState('');
     const [selectedTech, setSelectedTech] = useState('All');
     const [selectedProject, setSelectedProject] = useState(null);
@@ -51,7 +54,11 @@ export default function Projects({ projects = [], settings = {} }) {
 
     return (
         <PublicLayout settings={settings}>
-            <Head title="Projects - Developer Portfolio" />
+            <Head title="Projects - Developer Portfolio">
+                <meta name="description" content="Explore a showcase of my web applications, backend systems, and design projects built with React, Laravel, and other modern technologies." />
+                <meta name="keywords" content="Projects, Portfolio, React, Laravel, Web Apps, Software Engineering, Syafiq" />
+                <link rel="canonical" href={canonicalUrl} />
+            </Head>
 
             <AnimatePresence mode="wait">
                 {isLoading ? (

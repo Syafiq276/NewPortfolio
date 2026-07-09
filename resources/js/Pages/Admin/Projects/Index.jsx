@@ -1,7 +1,7 @@
 import React from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { Plus, Edit2, Trash2, ShieldCheck, ShieldAlert, RefreshCw, ExternalLink } from 'lucide-react';
+import { Plus, Edit2, Trash2, ShieldCheck, ShieldAlert, RefreshCw, ExternalLink, Eye, EyeOff } from 'lucide-react';
 
 export default function Index({ projects = [] }) {
     const { delete: destroy } = useForm();
@@ -58,6 +58,7 @@ export default function Index({ projects = [] }) {
                                     <th className="py-3 px-4 w-24">Image</th>
                                     <th className="py-3 px-4">Project Title</th>
                                     <th className="py-3 px-4">Technologies</th>
+                                    <th className="py-3 px-4 w-28">Visibility</th>
                                     <th className="py-3 px-4 w-28">Featured</th>
                                     <th className="py-3 px-4 w-20">Order</th>
                                     <th className="py-3 px-4 text-right w-44">Actions</th>
@@ -88,6 +89,17 @@ export default function Index({ projects = [] }) {
                                                     </span>
                                                 ))}
                                             </div>
+                                        </td>
+                                        <td className="py-3.5 px-4">
+                                            {proj.is_visible ? (
+                                                <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20">
+                                                    <Eye className="w-3.5 h-3.5" /> Visible
+                                                </span>
+                                            ) : (
+                                                <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded-full border border-rose-500/20">
+                                                    <EyeOff className="w-3.5 h-3.5" /> Hidden
+                                                </span>
+                                            )}
                                         </td>
                                         <td className="py-3.5 px-4">
                                             {proj.is_featured ? (
@@ -131,7 +143,7 @@ export default function Index({ projects = [] }) {
                                 ))}
                                 {projects.length === 0 && (
                                     <tr>
-                                        <td colSpan="6" className="text-center py-8 text-lunar-light/60">
+                                        <td colSpan="7" className="text-center py-8 text-lunar-light/60">
                                             No projects uploaded yet. Click "Add Project" to get started!
                                         </td>
                                     </tr>

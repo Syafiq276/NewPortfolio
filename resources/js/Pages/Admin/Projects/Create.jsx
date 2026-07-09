@@ -12,6 +12,7 @@ export default function Create() {
         demo_url: '',
         tech_stack_input: '',
         is_featured: false,
+        is_visible: true,
         order: 0,
         thumbnail: null,
         gallery: [],
@@ -33,6 +34,7 @@ export default function Create() {
             demo_url: data.demo_url,
             tech_stack: techStackArray,
             is_featured: data.is_featured ? 1 : 0,
+            is_visible: data.is_visible ? 1 : 0,
             order: data.order,
             thumbnail: data.thumbnail,
             gallery: data.gallery,
@@ -180,16 +182,31 @@ export default function Create() {
                         {errors.gallery && <p className="text-xs text-rose-400 flex items-center gap-1 mt-1"><AlertCircle className="w-3.5 h-3.5" /> {errors.gallery}</p>}
                     </div>
 
-                    {/* Featured Checkbox */}
-                    <div className="flex items-center gap-2 pt-2">
-                        <input
-                            type="checkbox"
-                            id="is_featured"
-                            checked={data.is_featured}
-                            onChange={(e) => setData('is_featured', e.target.checked)}
-                            className="rounded bg-lunar-dark/50 border-lunar-border text-gold-base focus:ring-0 cursor-pointer"
-                        />
-                        <label htmlFor="is_featured" className="text-xs font-semibold text-pearl-light uppercase tracking-wider cursor-pointer">Show on Home page (Featured)</label>
+                    {/* Status Checkboxes */}
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-6 pt-2">
+                        {/* Visible Checkbox */}
+                        <div className="flex items-center gap-2">
+                            <input
+                                type="checkbox"
+                                id="is_visible"
+                                checked={data.is_visible}
+                                onChange={(e) => setData('is_visible', e.target.checked)}
+                                className="rounded bg-lunar-dark/50 border-lunar-border text-gold-base focus:ring-0 cursor-pointer"
+                            />
+                            <label htmlFor="is_visible" className="text-xs font-semibold text-pearl-light uppercase tracking-wider cursor-pointer">Visible to Public</label>
+                        </div>
+
+                        {/* Featured Checkbox */}
+                        <div className="flex items-center gap-2">
+                            <input
+                                type="checkbox"
+                                id="is_featured"
+                                checked={data.is_featured}
+                                onChange={(e) => setData('is_featured', e.target.checked)}
+                                className="rounded bg-lunar-dark/50 border-lunar-border text-gold-base focus:ring-0 cursor-pointer"
+                            />
+                            <label htmlFor="is_featured" className="text-xs font-semibold text-pearl-light uppercase tracking-wider cursor-pointer">Show on Home page (Featured)</label>
+                        </div>
                     </div>
 
                     {/* Action button */}

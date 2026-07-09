@@ -15,8 +15,10 @@ import {
 import { Github, Linkedin, Twitter } from '@/Components/BrandIcons';
 
 export default function About({ experiences = [], certificates = [], settings = {} }) {
-    const { props } = usePage();
+    const { url, props } = usePage();
     const { flash } = props;
+    const appUrl = props.app_url || 'https://portfolio.syafiqdev.xyz';
+    const canonicalUrl = `${appUrl}${url === '/' ? '' : url}`;
 
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
@@ -44,7 +46,11 @@ export default function About({ experiences = [], certificates = [], settings = 
 
     return (
         <PublicLayout settings={settings}>
-            <Head title="About & Contact - Developer Portfolio" />
+            <Head title="About & Contact - Developer Portfolio">
+                <meta name="description" content="Learn about my background, career history, professional milestones, certificates, and get in touch with me directly through the contact form." />
+                <meta name="keywords" content="About Me, Professional Experience, Timeline, Contact, Software Engineer, Certificates" />
+                <link rel="canonical" href={canonicalUrl} />
+            </Head>
 
             <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 space-y-24 relative">
                 {/* Radial Glows */}

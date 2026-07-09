@@ -15,6 +15,7 @@ class Project extends Model
         'demo_url',
         'tech_stack',
         'is_featured',
+        'is_visible',
         'order',
         'gallery_images',
     ];
@@ -22,6 +23,7 @@ class Project extends Model
     protected $casts = [
         'tech_stack' => 'array',
         'is_featured' => 'boolean',
+        'is_visible' => 'boolean',
         'gallery_images' => 'array',
     ];
 }

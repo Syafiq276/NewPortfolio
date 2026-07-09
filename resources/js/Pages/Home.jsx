@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import { motion } from 'framer-motion';
 import { ArrowRight, ExternalLink, Award, Calendar, ShieldCheck } from 'lucide-react';
@@ -27,6 +27,10 @@ const getIconComponent = (name) => {
 };
 
 export default function Home({ projects = [], skills = [], certificates = [], settings = {} }) {
+    const { url, props } = usePage();
+    const appUrl = props.app_url || 'https://portfolio.syafiqdev.xyz';
+    const canonicalUrl = `${appUrl}${url === '/' ? '' : url}`;
+    const siteTitle = settings.site_title || "Home - Developer Portfolio";
     const [selectedProject, setSelectedProject] = useState(null);
 
     const heroVariants = {
@@ -55,7 +59,24 @@ export default function Home({ projects = [], skills = [], certificates = [], se
 
     return (
         <PublicLayout settings={settings}>
-            <Head title="Home - Developer Portfolio" />
+            <Head title={siteTitle}>
+                <meta name="description" content={settings.about_summary || "Hi, I'm Syafiq. I specialize in crafting high-end single-page applications with clean design aesthetics, fluid micro-interactions, and secure backends."} />
+                <meta name="keywords" content="Software Developer, Full Stack Developer, Laravel, React, Portfolio, Web Development, Syafiq" />
+                <link rel="canonical" href={canonicalUrl} />
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Person",
+                        "name": "Syafiq",
+                        "jobTitle": "Software Developer",
+                        "url": appUrl,
+                        "sameAs": [
+                            settings.github_url || "https://github.com",
+                            settings.linkedin_url || "https://linkedin.com"
+                        ].filter(Boolean)
+                    })}
+                </script>
+            </Head>
 
             {/* Hero Section */}
             <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden px-4 py-16 sm:px-6 lg:px-8 border-b border-lunar-light/10">

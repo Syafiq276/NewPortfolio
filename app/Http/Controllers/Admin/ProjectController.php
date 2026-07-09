@@ -87,6 +87,7 @@ class ProjectController extends Controller
                     'demo_url' => $repo['homepage'] ?? null,
                     'tech_stack' => $techStack,
                     'is_featured' => false,
+                    'is_visible' => true,
                     'order' => Project::max('order') + 1,
                 ]);
 
@@ -111,6 +112,7 @@ class ProjectController extends Controller
             'demo_url' => 'nullable|url|max:255',
             'tech_stack' => 'required|array',
             'is_featured' => 'required|boolean',
+            'is_visible' => 'required|boolean',
             'order' => 'required|integer',
             'thumbnail' => 'nullable|image|max:2048',
             'gallery' => 'nullable|array',
@@ -154,6 +156,7 @@ class ProjectController extends Controller
             'demo_url' => 'nullable|url|max:255',
             'tech_stack' => 'required|array',
             'is_featured' => 'required|boolean',
+            'is_visible' => 'required|boolean',
             'order' => 'required|integer',
             'thumbnail' => 'nullable|image|max:2048',
             'gallery' => 'nullable|array',
